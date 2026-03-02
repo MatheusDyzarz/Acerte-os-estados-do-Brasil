@@ -24,10 +24,31 @@ botao.onclick = function enviarMensagem() {
 
 
 /*
-contador de estados, mostrar pro jogar ex: 13/27
-contador de tempo
+contador de estados, mostrar pro jogar ex: 13/27 (FEITO)
+contador de tempo (FEITO)
 adicionar a logica de pintar o estado
 */
+let segundos = 0;
+let minutos = 0;
+let cronometro = null;
+
+    if (cronometro == null) { 
+        iniciar.onclick = function cronometro() {
+            iniciar = setInterval(function() {
+           segundos++;
+        if (segundos == 60) {
+            segundos = 0;
+            minutos++;
+        }
+
+        document.getElementById("iniciar").innerText =
+            (minutos < 10 ? "0" + minutos : minutos) + ":" +
+            (segundos < 10 ? "0" + segundos : segundos);
+                
+            }, 1000);
+        }
+    }
+
 
 let contador = 0
 
@@ -98,4 +119,3 @@ function criarTabela(mensagem) {
     };
 
 };  */
-
