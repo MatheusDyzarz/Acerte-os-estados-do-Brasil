@@ -3,7 +3,7 @@ let input = document.getElementById("receberNome")
 
 var contadorDeEstados = 0
 
-let botao = document.getElementById("enviar")
+let enviar = document.getElementById("enviar")
 
 var lista = ["acre", "alagoas", "amapa", "amazonas", "bahia", "ceara", "distrito federal", "espirito santo", "goias", "maranhao", "mato grosso", "mato grosso do sul", "minas gerais",
     "para", "parana", "paraiba", "pernambuco", "piaui", "rio grande do sul", "rio de janeiro", "rio grande do norte", "rondonia",
@@ -12,7 +12,7 @@ var lista = ["acre", "alagoas", "amapa", "amazonas", "bahia", "ceara", "distrito
 var listaAcertos = []
 
 
-botao.onclick = function enviarMensagem() {
+enviar.onclick = function enviarMensagem() {
     let mensagem = input.value;
     verificarEstado(mensagem)
     input.value = ""
@@ -20,42 +20,58 @@ botao.onclick = function enviarMensagem() {
 
 }
 
+function popUp () {
+    let help = document.getElementById("help")
+    //let popup = document.getElementById("popUp");
+  help.classList.toggle("show");
+}
 
 
 
-/*
-contador de estados, mostrar pro jogar ex: 13/27 (FEITO)
-contador de tempo (FEITO)
-adicionar a logica de pintar o estado
-*/
+
+/* adicionar a logica de pintar o estado*/
+
+function pintarEstados(mensagem) {
+const containerAcerto = document.getElementById("acerto");
+    const circulo = document.createElement("div");
+    circulo.className = "circulo";
+    containerAcerto.appendChild(circulo);
+}
+
+
+
+
 let segundos = 0;
 let minutos = 0;
 let cronometro = null;
+let iniciar = document.getElementById("iniciar")
 
-    if (cronometro == null) { 
-        iniciar.onclick = function cronometro() {
-            iniciar = setInterval(function() {
-           segundos++;
-        if (segundos == 60) {
-            segundos = 0;
-            minutos++;
-        }
+if (cronometro == null) {
+    iniciar.onclick = function cronometro() {
+        iniciar = setInterval(function () {
+            segundos++;
+            if (segundos == 60) {
+                segundos = 0;
+                minutos++;
+            }
 
-        document.getElementById("iniciar").innerText =
-            (minutos < 10 ? "0" + minutos : minutos) + ":" +
-            (segundos < 10 ? "0" + segundos : segundos);
-                
-            }, 1000);
-        }
+            document.getElementById("iniciar").innerText =
+                (minutos < 10 ? "0" + minutos : minutos) + ":" +
+                (segundos < 10 ? "0" + segundos : segundos);
+
+        }, 1000);
     }
+}
 
 
 let contador = 0
 
 function contadorEstados() {
-    contador +=1
-    console.log(contador+"/27")
+    contador += 1
+    document.getElementById("contador").innerText = (contador + "/27");
+    
 }
+
 
 function verificarEstado(mensagem) {
 
@@ -74,7 +90,9 @@ function criarTabela(mensagem) {
     const novaLinha = tabela.insertRow();
     const novaCelula = novaLinha.insertCell();
     novaCelula.textContent = mensagem;
-
+    
+    pintarEstados(mensagem);
+    
 }
 
 
@@ -85,6 +103,9 @@ function criarTabela(mensagem) {
 
 
 
+
+
+//mostrar ao usuario a tabela padronizada
 
 /* function padronizacao() {
 
