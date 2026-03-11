@@ -20,10 +20,10 @@ enviar.onclick = function enviarMensagem() {
 
 }
 
-function popUp () {
-    let help = document.getElementById("help")
-    //let popup = document.getElementById("popUp");
-  help.classList.toggle("show");
+function popUpFunction () {
+    //let help = document.getElementById("help")
+    var popup = document.getElementById("mypopup");
+  popup.classList.toggle("show");
 }
 
 
