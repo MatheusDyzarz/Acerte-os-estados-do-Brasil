@@ -19,7 +19,7 @@ body {
     border-radius: 15px;
 }
 
-#help {
+.popup {
 
     position: relative;
     display: inline-block;
@@ -29,13 +29,14 @@ body {
     -webkit-text-fill-color: #96744d;
     background-color: #f7dac7;
     width: 40px;
+    margin-top: 50px;
 }
 
-#help.popUp {
+.popup .popuptexto {
     visibility: hidden;
   width: 160px;
   background-color: #555;
-  color: #fff;
+  color: #ffffff;
   text-align: center;
   border-radius: 6px;
   padding: 8px 0;
@@ -46,7 +47,7 @@ body {
   margin-left: -80px;
 }
 
-#help.popUp {
+.popup .popuptexto::after {
     content: "";
   position: absolute;
   top: 100%;
@@ -57,7 +58,7 @@ body {
   border-color: #555 transparent transparent transparent;
 }
 
-#help .show {
+.popup .show {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s
