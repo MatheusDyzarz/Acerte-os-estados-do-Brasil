@@ -11,19 +11,26 @@ var lista = ["acre", "alagoas", "amapa", "amazonas", "bahia", "ceara", "distrito
 
 var listaAcertos = []
 
-
 enviar.onclick = function enviarMensagem() {
+
     let mensagem = input.value;
     verificarEstado(mensagem)
     input.value = ""
 
 
+    let encontrado = false;
 }
 
-function popUpFunction () {
+/*var jogar
+comecar.onclick = function iniciarJogo() {
+    if (comecar.)
+    
+}*/
+
+function popUpFunction() {
     //let help = document.getElementById("help")
     var popup = document.getElementById("mypopup");
-  popup.classList.toggle("show");
+    popup.classList.toggle("show");
 }
 
 
@@ -31,12 +38,6 @@ function popUpFunction () {
 
 /* adicionar a logica de pintar o estado*/
 
-function pintarEstados(mensagem) {
-const containerAcerto = document.getElementById("acerto");
-    const circulo = document.createElement("div");
-    circulo.className = "circulo";
-    containerAcerto.appendChild(circulo);
-}
 
 
 
@@ -48,6 +49,7 @@ let iniciar = document.getElementById("iniciar")
 
 if (cronometro == null) {
     iniciar.onclick = function cronometro() {
+        console.log("Entrou cronometro");
         iniciar = setInterval(function () {
             segundos++;
             if (segundos == 60) {
@@ -69,16 +71,27 @@ let contador = 0
 function contadorEstados() {
     contador += 1
     document.getElementById("contador").innerText = (contador + "/27");
-    
+
 }
 
 
 function verificarEstado(mensagem) {
-
     if (lista.includes(mensagem) && !listaAcertos.includes(mensagem)) {
+        const estados = document.querySelectorAll('svg path');
         listaAcertos.push(mensagem)
         criarTabela(mensagem)
         contadorEstados()
+
+        estados.forEach(estado => {
+            // Pegamos o título (Acre, Alagoas...) e normalizamos para comparar
+            let nomeEstado = estado.getAttribute('title').toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (nomeEstado === mensagem) {
+                estado.classList.add('acertou');
+                encontrado = true;
+            }
+        });
+        encontrado = true;
     } else {
         return false
     }
@@ -90,9 +103,8 @@ function criarTabela(mensagem) {
     const novaLinha = tabela.insertRow();
     const novaCelula = novaLinha.insertCell();
     novaCelula.textContent = mensagem;
-    
-    pintarEstados(mensagem);
-    
+
+
 }
 
 
