@@ -12,6 +12,7 @@ body {
 
 .retangulotitulo {
     background-color: #c09563;
+    text
     text-align: center;
     box-shadow: 0px 5px 20px #96744d;
     font-family: Arial, sans-serif;
@@ -35,7 +36,7 @@ body {
 .popup .popuptexto {
     visibility: hidden;
   width: 350px;
-  background-color: #555;
+  background-color: #284657;
   color: #ffffff;
   text-align: center;
   border-radius: 6px;
@@ -77,14 +78,14 @@ body {
 
 }
 path {
-    fill: #cccccc;
-    stroke: white;
+    fill: #c09563;
+    stroke: #000000;
     stroke-width: 1;
     transition: fill 0.3s;;
 }
 
 .acertou {
-    fill: green !important;
+    fill: #488652 !important;
 }
 
 .botaoEnviar {
