@@ -5,14 +5,22 @@ var contadorDeEstados = 0
 
 let enviar = document.getElementById("enviar")
 
-var lista = ["acre", "alagoas", "amapa", "amazonas", "bahia", "ceara", "distrito federal", "espirito santo", "goias", "maranhao", "mato grosso", "mato grosso do sul", "minas gerais",
+var estados = [
+    {nome: "acre"},
+    {nome: "alagoas"}
+]
+//valores = Object.values(estados); 
+
+console.log("ESTADOS", estados[0].nome)
+console.log("VALORES", valores)
+
+/*var lista = ["acre", "alagoas", "amapa", "amazonas", "bahia", "ceara", "distrito federal", "espirito santo", "goias", "maranhao", "mato grosso", "mato grosso do sul", "minas gerais",
     "para", "parana", "paraiba", "pernambuco", "piaui", "rio grande do sul", "rio de janeiro", "rio grande do norte", "rondonia",
-    "roraima", "sao paulo", "santa catarina", "sergipe", "tocantins"];
+    "roraima", "sao paulo", "santa catarina", "sergipe", "tocantins"];*/
 
 var listaAcertos = []
 
 enviar.onclick = function enviarMensagem() {
-
     let mensagem = input.value;
     verificarEstado(mensagem)
     input.value = ""
@@ -107,13 +115,13 @@ function criarTabela(mensagem) {
 
 }
 
-
-
-
-
-
-
-
+document.getElementById('receberNome').addEventListener('keypress', function (e) {
+    console.log("aqui")
+    if (e.key === 'Enter') {
+        let mensagem = input.value;
+        verificarEstado(mensagem);
+    }
+});
 
 
 
