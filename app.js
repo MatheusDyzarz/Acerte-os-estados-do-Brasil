@@ -4,6 +4,7 @@ let iniciar = document.getElementById("iniciar");
 let salvarEstados = document.getElementById("botaoSalvar");
 let enviarEstados = document.getElementById("salvarEstados");
 
+
 let lista = [];
 let listaAcertos = [];
 
@@ -22,13 +23,14 @@ async function carregarEstados() {
     }
 
     const estados = await response.json();
-
+    
     lista = estados.map((estado) =>
       estado.name
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, ""),
-    );
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, ""),
+  );
+
   } catch (error) {
     console.error("Erro ao carregar estados:", error);
   }
@@ -134,40 +136,42 @@ iniciar.onclick = function () {
   }, 1000);
 };
 
-document.getElementById("formularioEstado").addEventListener("submit", async function (event) {
+document
+  .getElementById("formularioEstado")
+  .addEventListener("submit", async function (event) {
+    event.preventDefault(); // Evita recarregar a página
 
-  event.preventDefault(); // Evita recarregar a página
-
-  enviarEstados.value.trim();
-  // Validação simples
-  if (!enviarEstados) {
-    document.getElementById("resultado").innerText =
-      "Preencha todos os campos.";
-    return;
-  }
-
-  try {
-    const resposta = await fetch("http://localhost:3000/estado", {
-    
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-      }),
-    });
-    console.log(resposta)
-    if (!resposta.ok) {
-      throw new Error(`Erro ao buscar estados`);
+    name = enviarEstados.value.trim();
+    console.log(enviarEstados.value.trim())
+    // Validação simples
+    if (!enviarEstados) {
+      document.getElementById("resultado").innerText =
+        "Preencha todos os campos.";
+      return;
     }
 
-    const dados = await resposta.json();
-    console.log(dados)
-    document.getElementById("resultado").innerText =
-      "Dados enviados com sucesso! Resposta da API: " + JSON.stringify(dados);
-  } catch (erro) {
-    document.getElementById("resultado").innerText =
-      "Falha ao enviar dados: " + erro.message;
-  }
-});
+    try {
+      const resposta = await fetch("http://localhost:3000/estado", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+        }),
+      });
+      //console.log("teste resposta", resposta)
+      ;
+      if (!resposta.ok) {
+        throw new Error(`Erro ao buscar estados`);
+      }
+      console.log("resposta", resposta)
+
+      const dados = await resposta.json();
+      document.getElementById("resultado").innerText =
+        "Dados enviados com sucesso! Resposta da API: " + JSON.stringify(dados);
+    } catch (erro) {
+      document.getElementById("resultado").innerText =
+        "Falha ao enviar dados: " + erro.message;
+    }
+  });
